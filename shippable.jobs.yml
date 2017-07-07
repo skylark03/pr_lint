@@ -1,0 +1,8 @@
+jobs:
+  - name: lint_pull_requests_runSh
+    type: runSh
+    steps:
+      - IN: pr_lint_pr_only_gitRepo
+        showBuildStatus: true
+      - TASK:
+        - script: sleep 60m

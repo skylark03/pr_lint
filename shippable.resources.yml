@@ -1,0 +1,8 @@
+resources:
+  - name: pr_lint_pr_only_gitRepo
+    type: gitRepo
+    integration: github
+    pointer:
+      sourceName: skylark03/pr_lint
+      buildOnCommit: false
+      buildOnPullRequest: true
