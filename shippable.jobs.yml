@@ -9,4 +9,3 @@ jobs:
         - script: echo $PR_LINT_PR_ONLY_GITREPO_PATH
         - script: chmod +x /build/IN/pr_lint_pr_only_gitRepo/gitRepo/run_jshint.sh
         - script: /build/IN/pr_lint_pr_only_gitRepo/gitRepo/run_jshint.sh pr_lint_pr_only_gitRepo
-        - script: sleep 60m
