@@ -19,21 +19,22 @@ run_jshint() {
     echo "jshint found. Skipping installation."
   fi
 
-  echo -e "\nExtracting before and after SHAs for this PR"
-  cd $RES_REPO_PATH
-  export BEFORE=$(shipctl get_json_value version.json version.propertyBag.shaData.beforeCommitSha)
-  export AFTER=$(shipctl get_json_value version.json version.propertyBag.shaData.commitSha)
+  echo "Extracting before and after SHAs for this PR"
+  export BEFORE=$(shipctl get_json_value $RES_REPO_PATH/version.json version.propertyBag.shaData.beforeCommitSha)
+  export AFTER=$(shipctl get_json_value $RES_REPO_PATH/version.json version.propertyBag.shaData.commitSha)
 
-  echo -e "\nGetting list of JS files that changed between commits $BEFORE and $AFTER"
-  cd $RES_REPO_PATH/gitRepo
+  echo "Getting list of JS files that changed between commits $BEFORE and $AFTER"
+  pushd $RES_REPO_PATH/gitRepo
   export CHANGED_JS_FILES=$(git diff --name-only $BEFORE...$AFTER | grep ".js$")
 
   if [ "$CHANGED_JS_FILES" != "" ]; then
-    echo -e "\nRunning jshint against changed JS files"
+    echo "Running jshint against changed JS files"
     jshint $CHANGED_JS_FILES
   else
-    echo e "\nNo JS files changed between these commits"
+    echo "No JS files changed between these commits"
   fi
+  
+  popd
 }
 
 run_jshint
