@@ -7,11 +7,6 @@ export RES_REPO_PATH=$(eval echo "$"$RES_REPO_UP"_PATH")
 export RES_REPO_PULL_REQUEST=$(eval echo "$"$RES_REPO_UP"_PULL_REQUEST")
 
 run_jshint() {
-  if [ "$RES_REPO_PULL_REQUEST" == false ]; then
-    echo "This job was not triggered by a pull request. Exiting early"
-    return 0
-  fi
-
   if [ "$(which jshint)" == "" ]; then
     echo "Installing jshint"
     npm install -g jshint
@@ -37,4 +32,8 @@ run_jshint() {
   popd
 }
 
-run_jshint
+if [ "$RES_REPO_PULL_REQUEST" == false ]; then
+  echo "This job was not triggered by a pull request. Exiting early"
+else
+  run_jshint
+fi
