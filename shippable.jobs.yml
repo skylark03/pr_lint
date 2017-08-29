@@ -5,4 +5,6 @@ jobs:
       - IN: pr_lint_pr_only_gitRepo
         showBuildStatus: true
       - TASK:
+        - script: echo Pull request "$PR_LINT_PR_ONLY_GITREPO_PULL_REQUEST"
+        - script: echo $PR_LINT_PR_ONLY_GITREPO_PATH
         - script: sleep 60m
